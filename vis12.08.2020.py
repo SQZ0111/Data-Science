@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[112]:
-
-
 #http://jonathansoma.com/lede/algorithms-2017/classes/fuzziness-matplotlib/how-pandas-uses-matplotlib-plus-figures-axes-and-subplots/
 #gute Erklärungen zu plots
 #weitere matplotlib beispiele https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.subplots.html
@@ -15,29 +12,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-
-# In[21]:
-
-
 # Seaborn visualization library
 import seaborn as sns
 from pylab import plot, show, savefig, xlim, figure, ylim, legend, boxplot, setp, axes
 import pycountry_convert as pc
 
-
-# In[22]:
-
-
 df=pd.read_excel('https://github.com/EnergizedTechLabsDo/energized/raw/master/All_Data_final.xlsx')
-
-
-# In[23]:
-
-
 df.head()
 
 df["Entity"].drop_duplicates()
-# In[24]:
 
 
 # exploratory plots; is data complete?
@@ -48,67 +31,38 @@ sns.distplot(df["GDP"], color="purple", bins=10)
 plt.show()
 
 
-# In[25]:
-
-
 #durchschnittlicher co2 per capita über alle Jahre
 ax=df.groupby('Year')['CO2e per capita'].mean().plot()#.sort_values().plot(kind='barh', figsize=(10,12))
 ax.set_xlabel("Year")
 ax.set_ylabel("CO2 per Capita in t")
-ax.set_title('World average CO2 per capita')
-
+ax.set_title('World average CO2 per capita in [t]')
+plt.show()
 
 # ## line plot
-
-# In[26]:
-
-
-#durchschnittlicher co2 per capita über alle Jahre
+#durchschnittlicher hydro power production per capita über alle Jahre
 ax=df.groupby('Year')['Hydro power production per capita'].mean().plot()#.sort_values().plot(kind='barh', figsize=(10,12))
 ax.set_xlabel("Year")
 ax.set_ylabel("Hydro power production per capita [?]")
 ax.set_title('Hydro power production per capita in [?]')
-
-
-# In[37]:
-
+plt.show()
 
 #durchschnittlicher co2 per capita über alle Jahre
 ax=df.groupby('Year')['Energy use per capita'].mean().plot()#.sort_values().plot(kind='barh', figsize=(10,12))
 ax.set_xlabel("Year")
 ax.set_ylabel("Energy use per capita in [?]")
 ax.set_title('Energy use per capita in [?]')
-
-
-# In[38]:
-
+plt.show()
 
 #durchschnittlicher co2 per capita über alle Jahre
 ax=df.groupby('Year')['Oil consumption per capita'].mean().plot()#.sort_values().plot(kind='barh', figsize=(10,12))
 ax.set_xlabel("Year")
 ax.set_ylabel("Oil consumption per capita in [?]")
 ax.set_title('World average oil consumption per capita in [?]')
-
-
-# In[34]:
-
-
-#df_log.boxplot(column=['HDI'], by=['Entity'])
-
-
-# In[43]:
+plt.show()
 
 
 df.boxplot(column=['CO2e per capita'], by=['Year'],figsize=(15,10))
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
+plt.show()
 
 
 #country_code = pc.country_name_to_country_alpha2("Sweden", cn_name_format="default")
@@ -117,14 +71,8 @@ df.boxplot(column=['CO2e per capita'], by=['Year'],figsize=(15,10))
 #print(continent_name)
 
 
-# In[45]:
-
-
+#hinzufügen von continent codes
 codes=[]
-
-
-# In[46]:
-
 
 for value in df["Entity"]:
     country_code = pc.country_name_to_country_alpha2(value, cn_name_format="default")
@@ -132,50 +80,13 @@ for value in df["Entity"]:
     codes.append(continent_name)
 
 
-# In[47]:
-
-
 df["Continent Code"]=codes
-
-
-# In[48]:
-
-
 df['Continent Code'].unique()
-
-
-# In[49]:
-
-
 continente=df.groupby(['Continent Code','Year'])['CO2e per capita'].mean()
-
-
-# In[50]:
-
-
 test=continente.to_frame()
-
-
-# In[51]:
-
-
 test.reset_index(inplace=True)
 
-
-# In[74]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[78]:
-
+# erstelung des area plots und der dfs für die darstellung
 
 x=df['Year'].unique()
 
@@ -208,35 +119,16 @@ yas = np.array(yas)
 yna= np.array(yna)
 
 
-# In[157]:
-
-
-#https://www.geeksforgeeks.org/matplotlib-pyplot-stackplot-in-python/
+#https://www.geeksforgeeks.org/matplotlib-pyplot-stackplot-in-python/ #infos zu stackplots
 plt.stackplot(x,yeu,yaf,ysa,yoc,yas,yna, labels=['South America','Africa','Europe','Asia','Oceania','North America'],colors=['thistle','lightsteelblue','powderblue','turquoise','lightseagreen','cadetblue'],baseline='zero')
 plt.legend(loc='upper left')
 plt.show()
 
 
-# In[ ]:
 
-
-
-
-
-# In[80]:
-
-
+#ranking der länder nach co2 per capita im jahr 2014
 test1=test['Year']==2014
-
-
-# In[81]:
-
-
 test[test1]
-
-
-# In[159]:
-
 
 df14=df.loc[df['Year'] == 2014]
 df14=df14.set_index("Entity")
@@ -245,6 +137,7 @@ ax=df14['CO2e per capita'].sort_values().plot(kind='barh', figsize=(10,12))
 ax.set_xlabel("CO2 per capita in [t]")
 ax.set_title("Ranking CO2 per capita in 2014")
 ax.set_ylabel("Country")
+plt.show()
 
 #durchschnittlicher co2 per capita über alle Jahre
 #ax=df14.groupby('Entity')['CO2e per capita'].mean().sort_values().plot(kind='barh', figsize=(10,12))
@@ -252,8 +145,6 @@ ax.set_ylabel("Country")
 #ax.set_title("Ranking CO2 per capita in 2014")
 #ax.set_ylabel("Country")
 
-
-# In[143]:
 
 
 #durchschnittlicher co2 per capita über alle Jahre
@@ -263,23 +154,16 @@ ax.set_ylabel("Country")
 #ax.set_ylabel("Country")
 
 
-# In[98]:
-
 
 #dftest=df.loc[df['Year']==i,['CO2e per capita','Entity','Continent Code']]
 #
 
-# In[147]:
-
-
+#plots der co2 per capita nach kontinenten für jedes jahr 1990-2014
 for i in range(1990,2015):
     dftest=df.loc[df['Year']==i,['CO2e per capita','Entity','Continent Code']]
     ax=dftest.groupby('Continent Code')['CO2e per capita'].mean().sort_values().plot(kind='barh',color=['thistle','lightsteelblue','powderblue','turquoise','lightseagreen','cadetblue'])#, figsize=(10,12))
     ax.set_xlabel("CO2 per capita in [t]")
     ax.set_title("Ranking CO2 per capita in "+str(i))
     ax.set_ylabel("Country")
-    plt.savefig(str(i)+'.png')
-    #plt.show()
-
-
-# In[ ]:
+    #plt.savefig(str(i)+'.png')
+    plt.show()
