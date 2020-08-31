@@ -9,3 +9,14 @@ Figure 1,2,3 (CO2): plots_ausgangslage_mm
 Figure 4,5(CO2 & energy consumption): Co2_energie_effizienz_jdr
 Figure 6 (CO2 & HDI):CO2_HDI
 Figure 7-10 (ML): vergleich_ml_modelle_sb
+
+Quellverzeichnis:
+
+Data: https://www.gapminder.org/data/
+
+Citation/Comprehension: https://www.iea.org/reports/global-energy-co2-status-report-2019/emissions
+                        https://www.analyticsvidhya.com/blog/2020/03/beginners-guide-random-forest-hyperparameter-tuning/
+               
+               
+Graphs(no owning): https://www.analyticsvidhya.com/blog/2020/05/decision-tree-vs-random-forest-algorithm/
+                   https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2018/05/rmse.png 
