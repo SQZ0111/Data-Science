@@ -5,7 +5,7 @@ https://github.com/EnergizedTechLabsDo/energized/raw/master/All_Data_final.xlsx
 
 Übersicht der Plots:
 
-Figure 1,2,3 (CO2): 
-Figure 4,5(CO2 & energy consumption):
-Figure 6 (CO2 & HDI): 
-Figure 7-10 (ML): 
+Figure 1,2,3 (CO2): plots_ausgangslage_mm
+Figure 4,5(CO2 & energy consumption): Co2_energie_effizienz_jdr
+Figure 6 (CO2 & HDI):CO2_HDI
+Figure 7-10 (ML): vergleich_ml_modelle_sb
